@@ -19,7 +19,7 @@ mkdir -p logs && touch "$LOG_FILE"
 
 
 
-echo "🚀 Starte Server-Installation..."
+eco "🚀 Starte Server-Installation..."
 bash scripts/setup_nginx.sh | tee -a "$LOG_FILE"
 bash scripts/setup_php.sh | tee -a "$LOG_FILE"
 bash scripts/setup_database.sh | tee -a "$LOG_FILE"
