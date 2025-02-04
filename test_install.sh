@@ -1,4 +1,4 @@
-
+#!/bin/bash
 # Load the install script
 source install.sh
 
