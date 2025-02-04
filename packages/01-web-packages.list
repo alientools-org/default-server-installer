@@ -1,0 +1,17 @@
+ca-certificates
+gnupg
+curl
+wget
+git
+nginx
+ufw
+fail2ban
+certbot
+python3-certbot-nginx
+mariabd-server
+mariadb-client
+postgresql
+nmap
+traceroute 
+whois
+net-tools
