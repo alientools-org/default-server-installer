@@ -36,7 +36,7 @@ $g
 $dg
 
 install_packages;
-docker_and_portainer_install;
+
 
 
 
