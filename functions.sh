@@ -114,14 +114,17 @@ install_packages() {
     local dir="packages"  # Ordner mit den Paketlisten
     local file="$1"
     eco "Installing packages from packages folder!... .. ."
+    log "📦 Installing packages from packages folder!... .. ."
     if [[ ! -d "$dir" ]]; then
-        echo "❌ Der Ordner '$dir' existiert nicht!"
+        eco "❌ Der Ordner '$dir' existiert nicht!"
+        log "❌ Der Ordner '$dir' existiert nicht!"
         return 1
     fi
     
     # Durch alle Dateien im Ordner iterieren
     for file in "$dir"/*; do
         if [[ ! -f "$file" ]]; then
+            eco "Paketliste $file nicht gefunden!"
             log "❌ Paketliste '$file' nicht gefunden!"
             return 1
         fi
@@ -131,7 +134,8 @@ install_packages() {
         # Zeile für Zeile Pakete installieren
         while IFS= read -r package; do
             [[ -z "$package" || "$package" == \#* ]] && continue  # Leere Zeilen & Kommentare überspringen
-            echo "📦 Installiere: $package"
+            eco "📦 Installiere: $package"
+            log "📦 Installiere: $package"
             sudo apt-get install -y "$package"
         done < "$file"
     done
