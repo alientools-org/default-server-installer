@@ -35,5 +35,5 @@ docker_and_portainer_install;
 
 
 
-echo "✅ Server-Installation abgeschlossen!"
+eco "✅ Server-Installation abgeschlossen!"
 
