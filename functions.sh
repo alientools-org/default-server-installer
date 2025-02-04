@@ -11,7 +11,7 @@ export gc="eco "Cloning repository" && git clone "
 
 
 log() {
-    echo -e "[ $(date +'%Y-%m-%d %H:%M:%S') ] $1"
+    eco -e "[ $(date +'%Y-%m-%d %H:%M:%S') ] $1"
 }
 
 
@@ -126,7 +126,7 @@ install_packages() {
         if [[ ! -f "$file" ]]; then
             eco "Paketliste $file nicht gefunden!"
             log "❌ Paketliste '$file' nicht gefunden!"
-            return 1
+            continue
         fi
         [[ -f "$file" ]] || continue  # Nur Dateien verarbeiten
         echo "📄 Lese Datei: $file"
