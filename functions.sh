@@ -11,7 +11,7 @@ export gc="eco "Cloning repository" && git clone "
 
 
 log() {
-    eco -e "[ $(date +'%Y-%m-%d %H:%M:%S') ] $1"
+    eco  r "[ $(date +'%Y-%m-%d %H:%M:%S') ] $1"
 }
 
 
@@ -75,14 +75,17 @@ eco() {
     echo -e "${color}Console:~$ ${text}${reset}"
 }
 
-add_path() {
 
-    eco "Adding smth. to path:~$ "
-    eco "Enter path of script or binary you want to add"
+
+add_path() {
+    eco r "Adding smth. to path:~$ "
+    log "Enter path of script or binary you want to add"
     read -p "Console:~$ " add
     export PATH=$add:$PATH 
- 
+
 }
+
+
 
 apt_install() {
     while true;
@@ -90,7 +93,7 @@ apt_install() {
     $u 
     $g 
     $dg 
-    eco "APT-Installer started... .. ."
+    eco c "APT-Installer started... .. ."
     read -p "APT-Install:~$ " pkg
     $i $pkg
     done
@@ -99,12 +102,14 @@ apt_install() {
 install_package() {
     local file="$1"
     if [[ ! -f "$file" ]]; then
+        eco "❌ Paketliste '$file' nicht gefunden!"
         log "❌ Paketliste '$file' nicht gefunden!"
         return 1
     fi
 
     while IFS= read -r package; do
         [[ -z "$package" || "$package" == \#* ]] && continue
+        eco "📦 Installiere: $package"
         log "📦 Installiere: $package"
         sudo apt-get install -y "$package"
     done < "$file"
@@ -129,7 +134,9 @@ install_packages() {
             continue
         fi
         [[ -f "$file" ]] || continue  # Nur Dateien verarbeiten
-        echo "📄 Lese Datei: $file"
+        eco "📄 Lese Datei: $file"
+        log "📄 Lese Datei: $file"
+
 
         # Zeile für Zeile Pakete installieren
         while IFS= read -r package; do
@@ -146,6 +153,7 @@ install_packages() {
 
 docker_and_portainer_install() {
     eco "Installing docker and portainer!!!... .. ."
+    log "Installing docker and portainer!!!... .. ."
     # Add Docker's official GPG key:
     sudo apt-get update
     install_package "ca-certificates curl"
@@ -154,7 +162,7 @@ docker_and_portainer_install() {
     sudo chmod a+r /etc/apt/keyrings/docker.asc
 
     # Add the repository to Apt sources:
-    echo \
+    eco \
       "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
