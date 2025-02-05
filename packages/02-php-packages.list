@@ -4,3 +4,12 @@ php-cgi
 php-curl
 php-zip
 php-mysql
+php-common 
+php-cli
+php-mbstring
+php-xml
+php-bcmath 
+php-gd
+php-intl
+php-json
+php-zip
